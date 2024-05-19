@@ -1,26 +1,33 @@
-int imgWidth = 800; 
-int imgHeight = 800; 
-int maxShapes = 100; 
+int imgWidth = 800;
+int imgHeight = 800;
+int maxShapes = 100;
 ArrayList<Shape> shapes = new ArrayList<Shape>();
+int screenshotCounter = 0; 
 
 void settings() {
-  size(imgWidth, imgHeight); 
+  size(imgWidth, imgHeight);
 }
 
 void setup() {
-  frameRate(30); 
+  frameRate(30);
   generateShapes();
 }
 
 void draw() {
-  background(0); 
+  background(0);
   for (Shape s : shapes) {
     s.update();
     s.display();
   }
 
-  if (frameCount % 240 == 0) { 
-    regenerateShapes(); 
+  if (frameCount % 240 == 0) {
+    regenerateShapes();
+  }
+  
+  
+  if (frameCount % 30 == 0 && screenshotCounter < 9) {
+    saveFrame("screenshot-######.png");
+    screenshotCounter++;
   }
 }
 
@@ -78,7 +85,7 @@ class Shape {
         rect(x, y, size, size);
         break;
       case 2:
-        polygon(x, y, size, int(random(5, 10))); 
+        polygon(x, y, size, int(random(5, 10)));
         break;
     }
   }
